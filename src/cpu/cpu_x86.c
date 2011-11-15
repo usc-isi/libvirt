@@ -477,8 +477,9 @@ x86DataToCPU(const union cpuData *data,
     if ((vendor = x86DataToVendor(copy, map)) &&
         !(cpu->vendor = strdup(vendor->name)))
         goto no_memory;
-
+#if 0 // dkang: commented out to return full feature
     x86DataSubtract(copy, modelData);
+#endif
     x86DataSubtract(modelData, data);
 
     /* because feature policy is ignored for host CPU */

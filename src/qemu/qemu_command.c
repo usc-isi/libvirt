@@ -3327,6 +3327,11 @@ qemuBuildCommandLine(virConnectPtr conn,
                            &ut, &cpu, &hasHwVirt) < 0)
         goto error;
 
+#if 1 // dkang: for high performance computing
+    cpu = (char *)malloc(sizeof(char) * 10);
+    strcpy(cpu, "host");
+#endif
+
     if (cpu) {
         virCommandAddArgList(cmd, "-cpu", cpu, NULL);
         VIR_FREE(cpu);
